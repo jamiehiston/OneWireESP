@@ -55,7 +55,7 @@
         "type": "git",
         "url": "https://github.com/PaulStoffregen/OneWire"
     },
-    "version": "2.3.7",
+    "version": "1.0.0",
     "homepage": "https://www.pjrc.com/teensy/td_libs_OneWire.html",
     "frameworks": "ESP-IDF",
     "examples": [
