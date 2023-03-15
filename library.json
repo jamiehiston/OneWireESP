@@ -1,0 +1,64 @@
+{
+    "name": "OneWireESP",
+    "description": "Control 1-Wire protocol, OneWire library adapted to work without arduino - ESP-IDF only",
+    "keywords": "onewire, 1-wire, bus, sensor, temperature, ibutton",
+    "authors": [
+        {
+            "name": "Paul Stoffregen / Jamie Smith",
+            "email": "paul@pjrc.com",
+            "url": "http://www.pjrc.com",
+            "maintainer": true
+        },
+		{
+            "name": "Jamie Smith"
+        },
+        {
+            "name": "Jim Studt"
+        },
+        {
+            "name": "Tom Pollard",
+            "email": "pollard@alum.mit.edu"
+        },
+        {
+            "name": "Derek Yerger"
+        },
+        {
+            "name": "Josh Larios"
+        },
+        {
+            "name": "Robin James"
+        },
+        {
+            "name": "Glenn Trewitt"
+        },
+        {
+            "name": "Jason Dangel",
+            "email": "dangel.jason AT gmail.com"
+        },
+        {
+            "name": "Guillermo Lovato"
+        },
+        {
+            "name": "Ken Butcher"
+        },
+        {
+            "name": "Mark Tillotson"
+        },
+        {
+            "name": "Bertrik Sikken"
+        },
+        {
+            "name": "Scott Roberts"
+        }
+    ],
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/PaulStoffregen/OneWire"
+    },
+    "version": "2.3.7",
+    "homepage": "https://www.pjrc.com/teensy/td_libs_OneWire.html",
+    "frameworks": "ESP-IDF",
+    "examples": [
+        "examples/*/*.pde"
+    ]
+}
