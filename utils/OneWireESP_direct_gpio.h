@@ -434,13 +434,10 @@ void directWriteHigh(IO_REG_TYPE mask)
 #define IO_REG_TYPE unsigned int
 #define IO_REG_BASE_ATTR
 #define IO_REG_MASK_ATTR
-//#define DIRECT_READ(base, pin)          digitalRead(pin)
-//#define DIRECT_WRITE_LOW(base, pin)     digitalWrite(pin, LOW)
-//#define DIRECT_WRITE_HIGH(base, pin)    digitalWrite(pin, HIGH)
-//#define DIRECT_MODE_INPUT(base, pin)    pinMode(pin,INPUT)
-//#define DIRECT_MODE_OUTPUT(base, pin)   pinMode(pin,OUTPUT)
+
+//Important bit for ESP translation
 #define DIRECT_READ1                        gpio_get_level(OW1_PIN)
-#define DIRECT_WRITE_LOW1                   gpio_set_level(OW1_PIN, 0)      //these may be inverted!!
+#define DIRECT_WRITE_LOW1                   gpio_set_level(OW1_PIN, 0)
 #define DIRECT_WRITE_HIGH1                  gpio_set_level(OW1_PIN, 1)
 #define DIRECT_MODE_INPUT1                  gpio_set_direction(OW1_PIN,GPIO_MODE_INPUT)
 #define DIRECT_MODE_OUTPUT1                 gpio_set_direction(OW1_PIN,GPIO_MODE_OUTPUT)
