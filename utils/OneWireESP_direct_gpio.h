@@ -3,7 +3,8 @@
 
 // This header should ONLY be included by OneWire.cpp.  These defines are
 // meant to be private, used within OneWire.cpp, but not exposed to Arduino
-// sketches or other libraries which may include OneWire.h.
+// sketches (or ESP-IDF projects) or other libraries which may include OneWire.h
+// or OneWireESP.h
 
 #include <stdint.h>
 
@@ -439,11 +440,11 @@ void directWriteHigh(IO_REG_TYPE mask)
 //#define DIRECT_MODE_INPUT(base, pin)    pinMode(pin,INPUT)
 //#define DIRECT_MODE_OUTPUT(base, pin)   pinMode(pin,OUTPUT)
 #define DIRECT_READ1                        gpio_get_level(OW1_PIN)
-#define DIRECT_WRITE_LOW1                   gpio_set_level(OW1_PIN, 0)
+#define DIRECT_WRITE_LOW1                   gpio_set_level(OW1_PIN, 0)      //these may be inverted!!
 #define DIRECT_WRITE_HIGH1                  gpio_set_level(OW1_PIN, 1)
 #define DIRECT_MODE_INPUT1                  gpio_set_direction(OW1_PIN,GPIO_MODE_INPUT)
 #define DIRECT_MODE_OUTPUT1                 gpio_set_direction(OW1_PIN,GPIO_MODE_OUTPUT)
-#warning "OneWire. Fallback mode. Using API calls for pinMode,digitalRead and digitalWrite. Operation of this library is not guaranteed on this architecture."
+//#warning "OneWire. Fallback mode. Using API calls for pinMode,digitalRead and digitalWrite. Operation of this library is not guaranteed on this architecture."
 
 #endif
 
