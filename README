@@ -1,0 +1,13 @@
+This is a port of the OneWire.h library used in Arduino projects, for the ESP-IDF
+It only supports 1 bus at the moment (I will be adding support for more) but you
+can add multiple yourself using the same principal. I've deliberately named
+variables as DIRECT_READ1 (for example) to make it easier to know what needs
+duplicating and renumbering for multiple buses. I will be adding support later,
+but for now its a bit basic.
+
+====================================
+== TO DEFINE THE PIN FOR YOUR BUS ==
+====================================
+Go into the OneWireESP.h file and change gpio_num_9 to whatever pin you're using.
+The ESP framework is different to Arduino in that it's not a straight number definition,
+and you need to use this enum format i.e. gpio_num_1 for pin 1, etc.
