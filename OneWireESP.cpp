@@ -1,10 +1,10 @@
 /*
 Copyright (c) 2007, Jim Studt  (original old version - many contributors since)
 
-The latest version of this library may be found at:
-  http://www.pjrc.com/teensy/td_libs_OneWire.html
+Modified by Jamie in 2023 to work using the ESP IoT Development Framework as a drop-in
+replacement for Arduino project ports
 
-OneWire has been maintained by Paul Stoffregen (paul@pjrc.com) since
+OneWire (for Arduino) has been maintained by Paul Stoffregen (paul@pjrc.com) since
 January 2010.
 
 DO NOT EMAIL for technical support, especially not for ESP chips!
@@ -141,7 +141,7 @@ sample code bearing this copyright.
 
 #include "OneWireESP.h"
 #include "utils/OneWireESP_direct_gpio.h"
-#include "driver/gpio.h"                 //used for GPIO control
+#include "driver/gpio.h"                 //used for GPIO control on ESP
 
 
 
@@ -164,8 +164,8 @@ void OneWire::begin(gpio_num_t pin)
 //
 uint8_t OneWire::reset(void)
 {
-	IO_REG_TYPE mask IO_REG_MASK_ATTR = bitmask;
-	volatile IO_REG_TYPE *reg IO_REG_BASE_ATTR = baseReg;
+	//IO_REG_TYPE mask IO_REG_MASK_ATTR = bitmask;
+	//volatile IO_REG_TYPE *reg IO_REG_BASE_ATTR = baseReg;
 	uint8_t r;
 	uint8_t retries = 125;
 
@@ -198,8 +198,8 @@ uint8_t OneWire::reset(void)
 //
 void OneWire::write_bit(uint8_t v)
 {
-	IO_REG_TYPE mask IO_REG_MASK_ATTR = bitmask;
-	volatile IO_REG_TYPE *reg IO_REG_BASE_ATTR = baseReg;
+	//IO_REG_TYPE mask IO_REG_MASK_ATTR = bitmask;
+	//volatile IO_REG_TYPE *reg IO_REG_BASE_ATTR = baseReg;
 
 	if (v & 1) {
 		noInterrupts();
@@ -226,8 +226,8 @@ void OneWire::write_bit(uint8_t v)
 //
 uint8_t OneWire::read_bit(void)
 {
-	IO_REG_TYPE mask IO_REG_MASK_ATTR = bitmask;
-	volatile IO_REG_TYPE *reg IO_REG_BASE_ATTR = baseReg;
+	//IO_REG_TYPE mask IO_REG_MASK_ATTR = bitmask;
+	//volatile IO_REG_TYPE *reg IO_REG_BASE_ATTR = baseReg;
 	uint8_t r;
 
 	noInterrupts();
@@ -490,31 +490,6 @@ bool OneWire::search(uint8_t *newAddr, bool search_mode /* = true */)
 // "Understanding and Using Cyclic Redundancy Checks with Maxim iButton Products"
 //
 
-#if ONEWIRE_CRC8_TABLE
-// Dow-CRC using polynomial X^8 + X^5 + X^4 + X^0
-// Tiny 2x16 entry CRC table created by Arjen Lentz
-// See http://lentz.com.au/blog/calculating-crc-with-a-tiny-32-entry-lookup-table
-static const uint8_t dscrc2x16_table[] = {
-	0x00, 0x5E, 0xBC, 0xE2, 0x61, 0x3F, 0xDD, 0x83,
-	0xC2, 0x9C, 0x7E, 0x20, 0xA3, 0xFD, 0x1F, 0x41,
-	0x00, 0x9D, 0x23, 0xBE, 0x46, 0xDB, 0x65, 0xF8,
-	0x8C, 0x11, 0xAF, 0x32, 0xCA, 0x57, 0xE9, 0x74
-};
-
-// Compute a Dallas Semiconductor 8 bit CRC. These show up in the ROM
-// and the registers.  (Use tiny 2x16 entry CRC table)
-uint8_t OneWire::crc8(const uint8_t *addr, uint8_t len)
-{
-	uint8_t crc = 0;
-
-	while (len--) {
-		crc = *addr++ ^ crc;  // just re-using crc as intermediate
-		crc = dscrc2x16_table[len] + (crc & 0x0f) ^ dscrc2x16_table[len] + 16 + ((crc >> 4) & 0x0f);
-	}
-
-	return crc;
-}
-#else
 //
 // Compute a Dallas Semiconductor 8 bit CRC directly.
 // this is much slower, but a little smaller, than the lookup table.
@@ -538,7 +513,7 @@ uint8_t OneWire::crc8(const uint8_t *addr, uint8_t len)
 	}
 	return crc;
 }
-#endif
+//#endif
 
 #if ONEWIRE_CRC16
 bool OneWire::check_crc16(const uint8_t* input, uint16_t len, const uint8_t* inverted_crc, uint16_t crc)
