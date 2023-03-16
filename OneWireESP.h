@@ -9,13 +9,6 @@
 #include <utils/crc16.h>
 #endif
 
-#if ARDUINO >= 100
-//#include <Arduino.h>       // for delayMicroseconds, digitalPinToBitMask, etc
-#else
-//#include "WProgram.h"      // for delayMicroseconds
-//#include "pins_arduino.h"  // for digitalPinToBitMask, etc
-#endif
-
 // You can exclude certain features from OneWire.  In theory, this
 // might save some space.  In practice, the compiler automatically
 // removes unused code (technically, the linker, using -fdata-sections
@@ -51,9 +44,6 @@
 #define ONEWIRE_CRC16 1
 #endif
 
-#define OW1_PIN GPIO_NUM_11
-
-
 // Board-specific macros for direct GPIO
 #include "utils/OneWireESP_direct_regtype.h"
 #include "driver/gpio.h"
@@ -63,6 +53,11 @@
 #include "driver/rmt.h"
 #define noInterrupts() {portMUX_TYPE mux = portMUX_INITIALIZER_UNLOCKED;portENTER_CRITICAL(&mux)
 #define interrupts() portEXIT_CRITICAL(&mux);}
+
+
+//== Define your OneWire GPIO pin here ==//
+#define OW1_PIN GPIO_NUM_9
+
 
 class OneWire
 {
