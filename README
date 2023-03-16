@@ -3,7 +3,8 @@ It only supports 1 bus at the moment (I will be adding support for more) but you
 can add multiple yourself using the same principal. I've deliberately named
 variables as DIRECT_READ1 (for example) to make it easier to know what needs
 duplicating and renumbering for multiple buses. I will be adding support later,
-but for now its a bit basic.
+but for now its a bit basic. Still if you're anything like me then this library
+will be super helpful because there's no port of it that I know of.
 
 ====================================
 == TO DEFINE THE PIN FOR YOUR BUS ==
@@ -11,3 +12,9 @@ but for now its a bit basic.
 Go into the OneWireESP.h file and change gpio_num_9 to whatever pin you're using.
 The ESP framework is different to Arduino in that it's not a straight number definition,
 and you need to use this enum format i.e. gpio_num_1 for pin 1, etc.
+
+In main.cpp, declare the bus as you normally would. Use OneWire ow(OW1_PIN); for example
+this would mean your bus name (configurable by you) is named ow. OW1_PIN is the important
+bit and can't change. Sadly it needs to be done this way and defined in the header file
+due to the way GPIO pins are defined as enums in the ESP IDF, rather than integers like in
+Arduino.
