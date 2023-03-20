@@ -441,6 +441,12 @@ void directWriteHigh(IO_REG_TYPE mask)
 #define DIRECT_WRITE_HIGH1                  gpio_set_level(OW1_PIN, 1)
 #define DIRECT_MODE_INPUT1                  gpio_set_direction(OW1_PIN,GPIO_MODE_INPUT)
 #define DIRECT_MODE_OUTPUT1                 gpio_set_direction(OW1_PIN,GPIO_MODE_OUTPUT)
+
+#define DIRECT_READ2                        gpio_get_level(OW2_PIN)
+#define DIRECT_WRITE_LOW2                   gpio_set_level(OW2_PIN, 0)
+#define DIRECT_WRITE_HIGH2                  gpio_set_level(OW2_PIN, 1)
+#define DIRECT_MODE_INPUT2                  gpio_set_direction(OW2_PIN,GPIO_MODE_INPUT)
+#define DIRECT_MODE_OUTPUT2                 gpio_set_direction(OW2_PIN,GPIO_MODE_OUTPUT)
 //#warning "OneWire. Fallback mode. Using API calls for pinMode,digitalRead and digitalWrite. Operation of this library is not guaranteed on this architecture."
 
 #endif
